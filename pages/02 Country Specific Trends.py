@@ -2,7 +2,6 @@ import streamlit as st
 import plotly.express as px
 from utils.load_data import load_data
 from utils.css import apply_css
-import plotly.graph_objects as go
 
 st.set_page_config(page_title="Covid-19 Country Specific Trends", layout="wide")
 
@@ -32,21 +31,7 @@ st.markdown('---')
 
 # Melting the dataframe for the ploty chart
 
-df_melt = df_c.iloc[2:, :]
-
-df_melt = df_c.melt(
-    id_vars=['Attributes'],
-    var_name='Country',
-    value_name='Cases'
-)
-
-sr_d = df_d.iloc[2:, :].melt(
-    id_vars=['Attributes'],
-    var_name='Country',
-    value_name='Deaths'
-).iloc[:, -1]
-
-df_melt['Deaths'] = sr_d
+df_melt = load_data(melted=True)
 
 # df_plot = df_melt[df_melt['Country'] == country]
 
