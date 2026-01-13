@@ -2,6 +2,7 @@ import streamlit as st
 import plotly.express as px
 from utils.load_data import load_data
 from utils.css import apply_css
+import plotly.graph_objects as go
 
 st.set_page_config(page_title="Covid-19 Country Specific Trends", layout="wide")
 
@@ -33,20 +34,52 @@ st.markdown('---')
 
 df_melt = load_data(melted=True)
 
-# df_plot = df_melt[df_melt['Country'] == country]
+df_melt_c = df_melt[df_melt['Country'] == country]
 
-# Plotting the line chart
+fig = go.Figure()
 
-fig = px.line(
-    df_melt[df_melt['Country'] == country],
-    x='Attributes',
-    y=['Cases', 'Deaths'],
-    title=f"COVID-19 Trend in {country}",
-    labels={
-        "Attributes": "Date",
-        "value": "Count",
-        "variable": "Metric"
-    }
+fig.add_trace(
+    go.Scatter(
+        x=df_melt_c['Attributes'],
+        y=df_melt_c["Cases"],
+        name="Cases",
+        yaxis="y1",
+        line=dict(color="blue", width=3)
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        x=df_melt_c['Attributes'],
+        y=df_melt_c["Deaths"],
+        name="Deaths",
+        yaxis="y2",
+        line=dict(color="red", width=3)
+    )
+)
+
+fig.update_layout(
+    title=f"COVID-19 Cases vs Deaths for {country}",
+    xaxis_title="Date",
+
+    yaxis=dict(
+        title="Cases"
+    ),
+    yaxis2=dict(
+        title="Deaths",
+        overlaying="y",
+        side="right"
+    ),
+
+    template="plotly_white",
+    hovermode="x unified",
+    legend=dict(
+        x=1.05,
+        y=1,
+        xanchor="left",
+        yanchor="top"
+    ),
+    margin=dict(r=120)
 )
 
 st.plotly_chart(fig, width='stretch')
