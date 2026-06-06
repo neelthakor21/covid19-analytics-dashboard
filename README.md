@@ -106,7 +106,7 @@ Insight Generation
 ## Dashboard Preview
 
 <p align="center">
-  <a href="https://youtu.be/FEAP6teHuQI">
+  <a href="https://youtu.be/FEAP6teHuQI" target="_blank">
     <strong>Link to the demo video </strong>
   </a>
 </p>
