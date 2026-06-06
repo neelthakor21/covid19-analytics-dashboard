@@ -105,7 +105,11 @@ Insight Generation
 
 ## Dashboard Preview
 
-[![Watch Demo](docs/screenshots/demo_thumbnail.png)](https://youtu.be/FEAP6teHuQI)
+<p align="center">
+  <a href="https://youtu.be/FEAP6teHuQI">
+    <strong>Link to the demo video </strong>
+  </a>
+</p>
 
 ---
 
